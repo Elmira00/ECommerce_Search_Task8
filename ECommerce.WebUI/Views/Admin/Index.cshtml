@@ -1,0 +1,49 @@
+﻿@model ProductListViewModel
+<h1>Admin Module</h1>
+@if (Model.Products == null || Model.Products.Count == 0)
+{
+    <span class="alert alert-danger">No Product exist</span>
+}
+else
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Unit Price</th>
+                <th>UnitsInStock</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @item.ProductName
+                    </td>
+                    <td>
+                        @item.UnitPrice
+                    </td>
+                    <td>
+                        @item.UnitsInStock
+                    </td>
+                    <td>
+                        <a href="/Admin/RemoveProduct?productId=@item.ProductId"
+                           class="btn btn-xs btn-success">Delete Product</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <product-list-pager current-category="@Model.CurrentCategory"
+                        current-page="@Model.CurrentPage"
+                        page-count="@Model.PageCount"
+                        page-size="@Model.PageSize"
+                        admin="true">
+    </product-list-pager>
+
+}
